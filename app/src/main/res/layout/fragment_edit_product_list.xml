@@ -1,0 +1,48 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.esgi.ykeoxay.shopping.EditProductListFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_product_name"
+            android:layout_height="wrap_content"
+            android:width="200dp"
+            android:hint="@string/name"
+            android:inputType="textLongMessage"
+            android:layout_width="wrap_content">
+        </EditText>
+
+        <EditText
+            android:id="@+id/edit_product_quantity"
+            android:layout_height="wrap_content"
+            android:width="200dp"
+            android:hint="@string/quantity"
+            android:inputType="textLongMessage"
+            android:layout_width="wrap_content">
+        </EditText>
+
+
+        <EditText
+            android:id="@+id/edit_product_price"
+            android:layout_height="wrap_content"
+            android:width="200dp"
+            android:hint="@string/price"
+            android:inputType="textLongMessage"
+            android:layout_width="wrap_content">
+        </EditText>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/submit_form"/>
+    </LinearLayout>
+
+</FrameLayout>
