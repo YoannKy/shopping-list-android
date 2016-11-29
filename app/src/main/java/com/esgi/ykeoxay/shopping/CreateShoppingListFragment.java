@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import com.esgi.ykeoxay.shopping.Util.Config;
-import com.esgi.ykeoxay.shopping.Webservice.Webservice;
+import com.esgi.ykeoxay.shopping.Webservice.ShoppingListService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 
 
-public class    CreateShoppingListFragment extends Fragment {
+public class CreateShoppingListFragment extends Fragment {
     public CreateShoppingListFragment() {
         // Required empty public constructor
     }
@@ -43,13 +43,12 @@ public class    CreateShoppingListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 EditText name = (EditText) getActivity().findViewById(R.id.new_shopping_list_name);
-                Webservice ws = new Webservice();
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
                 String token = sharedPreferences.getString("token", "");
                 RequestParams params = new RequestParams();
                 params.put("token", token);
                 params.put("name", name.getText().toString());
-                ws.createShoppingList(new AsyncHttpResponseHandler() {
+                ShoppingListService.createShoppingList(new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
                         if (Config.DISPLAY_LOG) {

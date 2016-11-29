@@ -17,7 +17,7 @@ import android.widget.EditText;
 import com.esgi.ykeoxay.shopping.Interface.TokenParserResponse;
 import com.esgi.ykeoxay.shopping.Parser.AuthenticationParser;
 import com.esgi.ykeoxay.shopping.Util.Config;
-import com.esgi.ykeoxay.shopping.Webservice.Webservice;
+import com.esgi.ykeoxay.shopping.Webservice.AuthenticationService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
@@ -61,8 +61,7 @@ public class RegisterFragment extends Fragment implements TokenParserResponse{
                 params.put("email", email.getText().toString());
                 params.put("firstname", firstname.getText().toString());
                 params.put("password", password.getText().toString());
-                Webservice ws = new Webservice();
-                ws.register(new AsyncHttpResponseHandler() {
+                AuthenticationService.register(new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
                         if (Config.DISPLAY_LOG) {

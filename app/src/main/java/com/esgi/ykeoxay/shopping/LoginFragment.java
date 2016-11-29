@@ -18,10 +18,10 @@ import android.widget.EditText;
 import com.esgi.ykeoxay.shopping.Interface.TokenParserResponse;
 import com.esgi.ykeoxay.shopping.Parser.AuthenticationParser;
 import com.esgi.ykeoxay.shopping.Util.Config;
+import com.esgi.ykeoxay.shopping.Webservice.AuthenticationService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
-import com.esgi.ykeoxay.shopping.Webservice.Webservice;
 import android.content.SharedPreferences.Editor;
 
 public class LoginFragment extends Fragment implements TokenParserResponse {
@@ -58,8 +58,7 @@ public class LoginFragment extends Fragment implements TokenParserResponse {
                 RequestParams params = new RequestParams();
                 params.put("email", login.getText().toString());
                 params.put("password", password.getText().toString());
-                Webservice ws = new Webservice();
-                ws.login(new AsyncHttpResponseHandler() {
+                AuthenticationService.login(new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
                         if (Config.DISPLAY_LOG) {

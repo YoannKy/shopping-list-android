@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.esgi.ykeoxay.shopping.Util.Config;
-import com.esgi.ykeoxay.shopping.Webservice.Webservice;
+import com.esgi.ykeoxay.shopping.Webservice.ProductService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -51,7 +51,6 @@ public class CreateProductListFragment extends Fragment {
                 EditText name = (EditText) getActivity().findViewById(R.id.new_product_list_name);
                 EditText quantity = (EditText) getActivity().findViewById(R.id.new_product_list_quantity);
                 EditText price = (EditText) getActivity().findViewById(R.id.new_product_list_price);
-                Webservice ws = new Webservice();
                 String token = sharedPreferences.getString("token", "");
                 RequestParams params = new RequestParams();
                 params.put("token", token);
@@ -59,7 +58,7 @@ public class CreateProductListFragment extends Fragment {
                 params.put("name", name.getText().toString());
                 params.put("quantity", quantity.getText().toString());
                 params.put("price", price.getText().toString());
-                ws.createProduct(new AsyncHttpResponseHandler() {
+                ProductService.createProduct(new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
                         if (Config.DISPLAY_LOG) {

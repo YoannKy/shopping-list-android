@@ -19,7 +19,7 @@ import com.esgi.ykeoxay.shopping.Model.ShoppingList;
 import com.esgi.ykeoxay.shopping.ProductListFragment;
 import com.esgi.ykeoxay.shopping.R;
 import com.esgi.ykeoxay.shopping.Util.Config;
-import com.esgi.ykeoxay.shopping.Webservice.Webservice;
+import com.esgi.ykeoxay.shopping.Webservice.ShoppingListService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
@@ -133,14 +133,13 @@ public class ShoppingListAdapter extends BaseAdapter {
 
     protected void removeShoppingList(final Integer position)
     {
-        Webservice ws = new Webservice();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String token = sharedPreferences.getString("token", "");
         RequestParams params = new RequestParams();
         final ShoppingList shoppingList = lShoppingList.get(position);
         params.put("token", token);
         params.put("id", shoppingList.getId());
-        ws.removeShoppingList(new AsyncHttpResponseHandler() {
+        ShoppingListService.removeShoppingList(new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 if (Config.DISPLAY_LOG) {

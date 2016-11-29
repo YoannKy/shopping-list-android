@@ -17,7 +17,7 @@ import com.esgi.ykeoxay.shopping.Interface.ShoppingListParserResponse;
 import com.esgi.ykeoxay.shopping.Model.ShoppingList;
 import com.esgi.ykeoxay.shopping.Parser.ShoppingListParser;
 import com.esgi.ykeoxay.shopping.Util.Config;
-import com.esgi.ykeoxay.shopping.Webservice.Webservice;
+import com.esgi.ykeoxay.shopping.Webservice.ShoppingListService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
@@ -63,12 +63,11 @@ public class ShoppingListFragment extends Fragment implements ShoppingListParser
             fragmentTransaction.commit();
             }
         });
-        Webservice ws = new Webservice();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         String token = sharedPreferences.getString("token", "");
         RequestParams params = new RequestParams();
         params.put("token", token);
-        ws.shoppingList(new AsyncHttpResponseHandler() {
+        ShoppingListService.shoppingList(new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 if (Config.DISPLAY_LOG) {

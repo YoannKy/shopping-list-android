@@ -14,7 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import com.esgi.ykeoxay.shopping.Model.ShoppingList;
 import com.esgi.ykeoxay.shopping.Util.Config;
-import com.esgi.ykeoxay.shopping.Webservice.Webservice;
+import com.esgi.ykeoxay.shopping.Webservice.ShoppingListService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
@@ -76,8 +76,7 @@ public class EditShoppingListFragment extends Fragment {
     }
 
     protected void updateData(RequestParams params) {
-        Webservice ws = new Webservice();
-        ws.editShoppingList(new AsyncHttpResponseHandler() {
+        ShoppingListService.editShoppingList(new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 if (Config.DISPLAY_LOG) {
