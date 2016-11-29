@@ -122,6 +122,7 @@ public class ShoppingListAdapter extends BaseAdapter {
             FragmentManager fm = ((Activity) context).getFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.container, productListFragment);
+            fragmentTransaction.addToBackStack("");
             fragmentTransaction.commit();
             }
         });

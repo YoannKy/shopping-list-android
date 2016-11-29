@@ -66,7 +66,7 @@ public class ShoppingListFragment extends Fragment implements ShoppingListParser
             FragmentManager fm = getFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.container, new CreateShoppingListFragment());
-            fragmentTransaction.addToBackStack("");
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
             }
         });

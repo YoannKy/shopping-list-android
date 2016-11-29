@@ -63,6 +63,7 @@ public class ProductListFragment extends Fragment implements ProductListParserRe
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.container, createShoppingListFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
