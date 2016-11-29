@@ -1,7 +1,6 @@
 package com.esgi.ykeoxay.shopping.Webservice;
 
 import android.util.Log;
-
 import com.esgi.ykeoxay.shopping.Util.Config;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;

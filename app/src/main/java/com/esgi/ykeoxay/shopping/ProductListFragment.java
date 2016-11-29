@@ -23,8 +23,6 @@ import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 import java.util.ArrayList;
 
-import static android.content.Context.MODE_PRIVATE;
-
 
 public class ProductListFragment extends Fragment implements ProductListParserResponse {
 

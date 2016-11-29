@@ -13,9 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-
 import com.esgi.ykeoxay.shopping.EditShoppingListFragment;
 import com.esgi.ykeoxay.shopping.Model.ShoppingList;
 import com.esgi.ykeoxay.shopping.ProductListFragment;
@@ -24,10 +22,7 @@ import com.esgi.ykeoxay.shopping.Util.Config;
 import com.esgi.ykeoxay.shopping.Webservice.Webservice;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
 import org.apache.http.Header;
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -20,9 +20,7 @@ import com.esgi.ykeoxay.shopping.Util.Config;
 import com.esgi.ykeoxay.shopping.Webservice.Webservice;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
 import org.apache.http.Header;
-import org.json.JSONException;
 
 import static android.content.Context.MODE_PRIVATE;
 

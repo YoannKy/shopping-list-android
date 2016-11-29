@@ -1,7 +1,6 @@
 package com.esgi.ykeoxay.shopping.Parser;
 
 import android.os.AsyncTask;
-
 import com.esgi.ykeoxay.shopping.Interface.TokenParserResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
