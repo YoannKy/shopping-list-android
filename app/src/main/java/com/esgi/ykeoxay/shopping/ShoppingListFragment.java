@@ -16,10 +16,12 @@ import android.widget.ListView;
 
 import com.esgi.ykeoxay.shopping.Adapter.ProductAdapter;
 import com.esgi.ykeoxay.shopping.Adapter.ShoppingListAdapter;
+import com.esgi.ykeoxay.shopping.Interface.ShoppingListParserResponse;
+import com.esgi.ykeoxay.shopping.Interface.TokenParserResponse;
 import com.esgi.ykeoxay.shopping.Model.Product;
 import com.esgi.ykeoxay.shopping.Model.ShoppingList;
+import com.esgi.ykeoxay.shopping.Parser.ShoppingListParser;
 import com.esgi.ykeoxay.shopping.Util.Config;
-import com.esgi.ykeoxay.shopping.Webservice.Parser;
 import com.esgi.ykeoxay.shopping.Webservice.Webservice;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -29,7 +31,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class ShoppingListFragment extends Fragment {
+public class ShoppingListFragment extends Fragment implements ShoppingListParserResponse {
 
     private ListView listView;
     private ShoppingListAdapter adapter;
@@ -37,6 +39,11 @@ public class ShoppingListFragment extends Fragment {
     public ShoppingListFragment() {
         // Required empty public constructor
     }
+
+    public ShoppingListFragment getCurrentFragment() {
+        return this;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,12 +81,8 @@ public class ShoppingListFragment extends Fragment {
                 if (Config.DISPLAY_LOG) {
                     Log.i(Config.LOG_PREFIX, "Success! WS Response :" + new String(bytes));
                 }
-                try {
-                    ArrayList<ShoppingList> myArray = Parser.parseShoppingList(new String(bytes));
-                    initViewContent(myArray);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                ShoppingListParser shoppingListParser = new ShoppingListParser(getCurrentFragment());
+                shoppingListParser.execute(new String(bytes));
             }
 
             @Override
@@ -98,5 +101,10 @@ public class ShoppingListFragment extends Fragment {
         this.listView = (ListView) getView().findViewById(R.id.list_view);
         this.adapter = new ShoppingListAdapter(getActivity(), shoppingList);
         this.listView.setAdapter(this.adapter);
+    }
+
+    @Override
+    public void responseParsed(ArrayList<ShoppingList> shoppingList) {
+        initViewContent(shoppingList);
     }
 }

@@ -2,7 +2,6 @@
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,24 +15,24 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-
+import com.esgi.ykeoxay.shopping.Interface.TokenParserResponse;
+import com.esgi.ykeoxay.shopping.Parser.AuthenticationParser;
 import com.esgi.ykeoxay.shopping.Util.Config;
-import com.esgi.ykeoxay.shopping.Webservice.Parser;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
 import org.apache.http.Header;
 import com.esgi.ykeoxay.shopping.Webservice.Webservice;
-import org.json.JSONException;
 import android.content.SharedPreferences.Editor;
 
-import static android.content.Context.MODE_PRIVATE;
-
-
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements TokenParserResponse {
 
     public LoginFragment() {
         // Required empty public constructor
+    }
+
+    public LoginFragment getCurrentFragment()
+    {
+        return this;
     }
 
     @Override
@@ -66,22 +65,8 @@ public class LoginFragment extends Fragment {
                         if (Config.DISPLAY_LOG) {
                             Log.i(Config.LOG_PREFIX, "Success! WS Response :" + new String(bytes));
                         }
-                        try {
-                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-
-                            String sToken = Parser.parseAuthentication(new String(bytes));
-                            if(sToken != "") {
-                                Editor editor = sharedPreferences.edit();
-                                editor.putString("token", sToken);
-                                editor.apply();
-                                editor.commit();
-                                Log.i(Config.LOG_PREFIX, sharedPreferences.getString("token", ""));
-                                Intent myIntent = new Intent(getActivity().getApplicationContext(), HomeActivity.class);
-                                startActivity(myIntent);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        AuthenticationParser authenticationParser = new AuthenticationParser(getCurrentFragment());
+                        authenticationParser.execute(new String(bytes));
                     }
 
                     @Override
@@ -114,5 +99,18 @@ public class LoginFragment extends Fragment {
     }
 
 
+    @Override
+    public void responseParsed(String token) {
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        if(!token.equals("")) {
+            Editor editor = sharedPreferences.edit();
+            editor.putString("token", token);
+            editor.apply();
+            editor.commit();
+            Log.i(Config.LOG_PREFIX, sharedPreferences.getString("token", ""));
+            Intent myIntent = new Intent(getActivity().getApplicationContext(), HomeActivity.class);
+            startActivity(myIntent);
+        }
+    }
 }

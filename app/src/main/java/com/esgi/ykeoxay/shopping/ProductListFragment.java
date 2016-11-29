@@ -12,30 +12,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 import com.esgi.ykeoxay.shopping.Adapter.ProductAdapter;
+import com.esgi.ykeoxay.shopping.Interface.ProductListParserResponse;
 import com.esgi.ykeoxay.shopping.Model.Product;
+import com.esgi.ykeoxay.shopping.Parser.ProductParser;
 import com.esgi.ykeoxay.shopping.Util.Config;
-import com.esgi.ykeoxay.shopping.Webservice.Parser;
 import com.esgi.ykeoxay.shopping.Webservice.Webservice;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
 import org.apache.http.Header;
-import org.json.JSONException;
-
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class ProductListFragment extends Fragment {
+public class ProductListFragment extends Fragment implements ProductListParserResponse {
 
     private ListView listView;
     private ProductAdapter adapter;
 
     public ProductListFragment() {
         // Required empty public constructor
+    }
+
+    public ProductListFragment getCurrentFragment() {
+        return this;
     }
 
     @Override
@@ -88,12 +89,8 @@ public class ProductListFragment extends Fragment {
                 if (Config.DISPLAY_LOG) {
                     Log.i(Config.LOG_PREFIX, "Success! WS Response :" + new String(bytes));
                 }
-                try {
-                    ArrayList<Product> myArray = Parser.parseProduct(new String(bytes));
-                    initViewContent(myArray);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                ProductParser productParser = new ProductParser(getCurrentFragment());
+                productParser.execute(new String(bytes));
             }
 
             @Override
@@ -112,5 +109,10 @@ public class ProductListFragment extends Fragment {
         this.listView = (ListView) getView().findViewById(R.id.list_view);
         this.adapter = new ProductAdapter(getActivity(), productList);
         this.listView.setAdapter(this.adapter);
+    }
+
+    @Override
+    public void responseParsed(ArrayList<Product> products) {
+        initViewContent(products);
     }
 }

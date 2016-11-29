@@ -2,10 +2,8 @@ package com.esgi.ykeoxay.shopping;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -16,9 +14,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-
+import com.esgi.ykeoxay.shopping.Interface.TokenParserResponse;
+import com.esgi.ykeoxay.shopping.Parser.AuthenticationParser;
 import com.esgi.ykeoxay.shopping.Util.Config;
-import com.esgi.ykeoxay.shopping.Webservice.Parser;
 import com.esgi.ykeoxay.shopping.Webservice.Webservice;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -29,12 +27,16 @@ import org.json.JSONException;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment implements TokenParserResponse{
 
     public RegisterFragment() {
         // Required empty public constructor
     }
 
+    public RegisterFragment getCurrentFragment()
+    {
+        return this;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class RegisterFragment extends Fragment {
         Button submit = (Button) getActivity().findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 EditText email = (EditText) getActivity().findViewById(R.id.email);
                 EditText firstname = (EditText) getActivity().findViewById(R.id.firstname);
                 EditText password = (EditText) getActivity().findViewById(R.id.password);
@@ -68,20 +70,9 @@ public class RegisterFragment extends Fragment {
                         if (Config.DISPLAY_LOG) {
                             Log.i(Config.LOG_PREFIX, "Success! WS Response :" + new String(bytes));
                         }
-                        try {
-                            SharedPreferences sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            String sToken = Parser.parseAuthentication(new String(bytes));
-                            if(sToken != "") {
-                                editor.putString("token", sToken);
-                                Intent myIntent = new Intent(getActivity().getApplicationContext(), HomeActivity.class);
-                                startActivity(myIntent);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        AuthenticationParser authenticationParser = new AuthenticationParser(getCurrentFragment());
+                        authenticationParser.execute(new String(bytes));
                     }
-
                     @Override
                     public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                         String failedReponse = "";
@@ -111,4 +102,15 @@ public class RegisterFragment extends Fragment {
         super.onResume();
     }
 
+    @Override
+    public void responseParsed(String token) {
+        SharedPreferences sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if(!token.equals("")) {
+            editor.putString("token", token);
+            Intent myIntent = new Intent(getActivity().getApplicationContext(), HomeActivity.class);
+            startActivity(myIntent);
+        }
+
+    }
 }
