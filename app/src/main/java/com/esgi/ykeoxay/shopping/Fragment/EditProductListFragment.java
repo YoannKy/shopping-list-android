@@ -1,4 +1,4 @@
-package com.esgi.ykeoxay.shopping;
+package com.esgi.ykeoxay.shopping.Fragment;
 
 import android.app.FragmentManager;
 import android.content.SharedPreferences;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import com.esgi.ykeoxay.shopping.Model.Product;
+import com.esgi.ykeoxay.shopping.R;
 import com.esgi.ykeoxay.shopping.Util.Config;
 import com.esgi.ykeoxay.shopping.Webservice.ProductService;
 import com.loopj.android.http.AsyncHttpResponseHandler;

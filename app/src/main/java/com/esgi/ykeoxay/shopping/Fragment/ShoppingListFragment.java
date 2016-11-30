@@ -1,4 +1,4 @@
-package com.esgi.ykeoxay.shopping;
+package com.esgi.ykeoxay.shopping.Fragment;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -16,6 +16,7 @@ import com.esgi.ykeoxay.shopping.Adapter.ShoppingListAdapter;
 import com.esgi.ykeoxay.shopping.Interface.ShoppingListParserResponse;
 import com.esgi.ykeoxay.shopping.Model.ShoppingList;
 import com.esgi.ykeoxay.shopping.Parser.ShoppingListParser;
+import com.esgi.ykeoxay.shopping.R;
 import com.esgi.ykeoxay.shopping.Util.Config;
 import com.esgi.ykeoxay.shopping.Webservice.ShoppingListService;
 import com.loopj.android.http.AsyncHttpResponseHandler;

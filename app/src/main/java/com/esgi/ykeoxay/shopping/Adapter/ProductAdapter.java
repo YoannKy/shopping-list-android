@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import com.esgi.ykeoxay.shopping.EditProductListFragment;
+import com.esgi.ykeoxay.shopping.Fragment.EditProductListFragment;
 import com.esgi.ykeoxay.shopping.Model.Product;
 import com.esgi.ykeoxay.shopping.R;
 import com.esgi.ykeoxay.shopping.Util.Config;

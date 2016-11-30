@@ -1,4 +1,4 @@
-package com.esgi.ykeoxay.shopping;
+package com.esgi.ykeoxay.shopping.Activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -11,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.esgi.ykeoxay.shopping.Fragment.ShoppingListFragment;
+import com.esgi.ykeoxay.shopping.R;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

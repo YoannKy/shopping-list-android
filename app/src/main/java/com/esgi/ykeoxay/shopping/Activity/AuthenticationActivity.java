@@ -1,9 +1,12 @@
-package com.esgi.ykeoxay.shopping;
+package com.esgi.ykeoxay.shopping.Activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.esgi.ykeoxay.shopping.Fragment.LoginFragment;
+import com.esgi.ykeoxay.shopping.R;
 
 public class AuthenticationActivity extends AppCompatActivity {
 
