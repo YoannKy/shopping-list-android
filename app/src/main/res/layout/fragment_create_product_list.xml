@@ -17,6 +17,8 @@
             android:layout_height="wrap_content"
             android:width="200dp"
             android:hint="@string/name"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
             android:inputType="textLongMessage"
             android:layout_width="wrap_content">
         </EditText>
@@ -25,6 +27,8 @@
             android:id="@+id/new_product_list_quantity"
             android:layout_height="wrap_content"
             android:width="200dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
             android:hint="@string/quantity"
             android:inputType="textLongMessage"
             android:layout_width="wrap_content">
@@ -33,6 +37,8 @@
         <EditText
             android:id="@+id/new_product_list_price"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
             android:width="200dp"
             android:hint="@string/price"
             android:inputType="textLongMessage"
@@ -43,6 +49,8 @@
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
             android:text="@string/submit_form"/>
     </LinearLayout>
 

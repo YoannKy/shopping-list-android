@@ -66,6 +66,7 @@ public class ShoppingListAdapter extends BaseAdapter {
             viewHolder.name = (TextView) convertView.findViewById(R.id.shopping_list_name);
             viewHolder.id = (TextView) convertView.findViewById(R.id.shopping_list_id);
             viewHolder.completed = (TextView) convertView.findViewById(R.id.shopping_list_completed);
+            viewHolder.completedLabel = (TextView) convertView.findViewById(R.id.shopping_list_completed_label);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -74,7 +75,11 @@ public class ShoppingListAdapter extends BaseAdapter {
         viewHolder.name.setText(currentShoppingList.getName());
         viewHolder.id.setText(String.valueOf(currentShoppingList.getId()));
         viewHolder.completed.setText(String.valueOf(currentShoppingList.getCompleted()));
-
+        if(currentShoppingList.getCompleted()) {
+            viewHolder.completedLabel.setText(context.getResources().getString(R.string.open_shopping_list));
+        } else {
+            viewHolder.completedLabel.setText(context.getResources().getString(R.string.closed_shopping_list));
+        }
         Button edit = (Button) convertView.findViewById(R.id.edit_shopping_list);
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +134,7 @@ public class ShoppingListAdapter extends BaseAdapter {
         TextView name;
         TextView id;
         TextView completed;
+        TextView completedLabel;
     }
 
     protected void removeShoppingList(final Integer position)

@@ -12,6 +12,8 @@
     <string name="edit">Edit</string>
     <string name="remove">Remove</string>
     <string name="show">show</string>
+    <string name="closed_shopping_list">This shopping list is not closed</string>
+    <string name="open_shopping_list">This shopping list is closed</string>
     <string name="edit_completed">Close this list</string>
     <string name="submit_form">Submit</string>
     <!-- Strings related to login -->

@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:width="200dp"
             android:hint="@string/prompt_email"
+            android:textColorHint="@color/gray"
             android:inputType="textLongMessage"
             android:layout_width="wrap_content">
         </EditText>
@@ -25,6 +26,7 @@
             android:layout_height="wrap_content"
             android:width="200dp"
             android:hint="@string/prompt_firstname"
+            android:textColorHint="@color/gray"
             android:inputType="textLongMessage"
             android:layout_width="wrap_content">
         </EditText>
@@ -34,6 +36,7 @@
             android:width="200dp"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_password"
+            android:textColorHint="@color/gray"
             android:inputType="textPassword"
             android:layout_width="wrap_content">
         </EditText>
@@ -42,6 +45,7 @@
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
             android:text="@string/action_register"/>
     </LinearLayout>
 

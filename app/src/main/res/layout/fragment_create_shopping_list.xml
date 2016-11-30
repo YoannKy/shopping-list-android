@@ -18,13 +18,17 @@
             android:width="200dp"
             android:hint="@string/name"
             android:inputType="textLongMessage"
-            android:layout_width="wrap_content">
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray">
         </EditText>
 
         <Button
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
             android:text="@string/submit_form"/>
     </LinearLayout>
 
