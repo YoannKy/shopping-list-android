@@ -66,18 +66,7 @@ public class ProductListFragment extends Fragment implements ProductListParserRe
                 fragmentTransaction.commit();
             }
         });
-
-        FloatingActionButton returnBack = (FloatingActionButton) getActivity().findViewById(R.id.fab_return);
-        returnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ShoppingListFragment shoppingListFragment = new ShoppingListFragment();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.container, shoppingListFragment);
-                fragmentTransaction.commit();
-            }
-        });
+        
         String token = sharedPreferences.getString("token", "");
         RequestParams params = new RequestParams();
         params.put("token", token);
