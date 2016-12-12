@@ -49,6 +49,7 @@
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/button_margin"
             android:background="@color/colorPrimary"
             android:textColor="@color/white"
             android:text="@string/submit_form"/>
