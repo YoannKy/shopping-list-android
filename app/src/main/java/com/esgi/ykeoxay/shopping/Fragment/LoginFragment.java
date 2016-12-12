@@ -27,8 +27,9 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 import android.content.SharedPreferences.Editor;
+import android.widget.Toast;
 
-public class LoginFragment extends Fragment implements TokenParserResponse {
+ public class LoginFragment extends Fragment implements TokenParserResponse {
 
     public LoginFragment() {
         // Required empty public constructor
@@ -111,17 +112,20 @@ public class LoginFragment extends Fragment implements TokenParserResponse {
 
 
     @Override
-    public void responseParsed(String token) {
+    public void responseParsed(String result) {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        if(!token.equals("")) {
+        if(!result.equals("") && !result.contains(" ")) {
             Editor editor = sharedPreferences.edit();
-            editor.putString("token", token);
+            editor.putString("token", result);
             editor.apply();
             editor.commit();
             Log.i(Config.LOG_PREFIX, sharedPreferences.getString("token", ""));
             Intent myIntent = new Intent(getActivity().getApplicationContext(), HomeActivity.class);
             startActivity(myIntent);
+        } else {
+            Toast toast = Toast.makeText(getActivity().getApplicationContext(),result ,Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 }

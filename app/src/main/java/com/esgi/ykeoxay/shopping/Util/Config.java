@@ -16,6 +16,7 @@ public class Config {
     public final static String URL_PRODUCT = "product/list.php";
     public final static String URL_EDIT_PRODUCT = "product/edit.php";
     public final static String URL_REMOVE_PRODUCT = "product/remove.php";
+    public final static String ERROR_AUTH = "Error: check your credential or try later";
     public final static HashMap<String, String> regexMsg = new HashMap<String, String>() {
         {
             put("email", "The email is not valid");

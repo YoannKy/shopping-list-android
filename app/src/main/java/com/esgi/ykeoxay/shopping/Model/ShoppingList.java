@@ -1,9 +1,5 @@
 package com.esgi.ykeoxay.shopping.Model;
 
-/**
- * Created by ykeox on 28/11/2016.
- */
-
 public class ShoppingList {
 
     private String name;

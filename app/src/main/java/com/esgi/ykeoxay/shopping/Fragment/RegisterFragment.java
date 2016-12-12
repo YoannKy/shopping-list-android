@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.esgi.ykeoxay.shopping.Activity.HomeActivity;
 import com.esgi.ykeoxay.shopping.Interface.TokenParserResponse;
@@ -115,13 +116,16 @@ public class RegisterFragment extends Fragment implements TokenParserResponse{
     }
 
     @Override
-    public void responseParsed(String token) {
+    public void responseParsed(String result) {
         SharedPreferences sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        if(!token.equals("")) {
-            editor.putString("token", token);
+        if(!result.equals("") && !result.contains(" ")) {
+            editor.putString("token", result);
             Intent myIntent = new Intent(getActivity().getApplicationContext(), HomeActivity.class);
             startActivity(myIntent);
+        } else {
+            Toast toast = Toast.makeText(getActivity().getApplicationContext(),result ,Toast.LENGTH_LONG);
+            toast.show();
         }
 
     }

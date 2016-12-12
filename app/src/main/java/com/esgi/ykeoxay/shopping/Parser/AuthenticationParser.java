@@ -34,7 +34,7 @@ public class AuthenticationParser extends AsyncTask<String,Void,String> {
         if(contentJSON.getInt("code") == 0) {
             return contentJSON.getJSONObject("result").getString("token");
         } else {
-            return "";
+            return contentJSON.getString("msg");
         }
     }
 }
