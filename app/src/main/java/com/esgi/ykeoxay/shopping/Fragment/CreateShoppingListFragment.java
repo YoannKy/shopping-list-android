@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import com.esgi.ykeoxay.shopping.R;
 import com.esgi.ykeoxay.shopping.Util.Config;
+import com.esgi.ykeoxay.shopping.Validation.ShoppingListValidation;
 import com.esgi.ykeoxay.shopping.Webservice.ShoppingListService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -45,33 +46,38 @@ public class CreateShoppingListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 EditText name = (EditText) getActivity().findViewById(R.id.new_shopping_list_name);
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                String token = sharedPreferences.getString("token", "");
-                RequestParams params = new RequestParams();
-                params.put("token", token);
-                params.put("name", name.getText().toString());
-                ShoppingListService.createShoppingList(new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                        if (Config.DISPLAY_LOG) {
-                            Log.i(Config.LOG_PREFIX, "Success! WS Response :" + new String(bytes));
+                if(ShoppingListValidation.isFormValid(name.getText().toString())) {
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                    String token = sharedPreferences.getString("token", "");
+                    RequestParams params = new RequestParams();
+                    params.put("token", token);
+                    params.put("name", name.getText().toString());
+                    ShoppingListService.createShoppingList(new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                            if (Config.DISPLAY_LOG) {
+                                Log.i(Config.LOG_PREFIX, "Success! WS Response :" + new String(bytes));
+                            }
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.container, new ShoppingListFragment());
+                            fragmentTransaction.addToBackStack("");
+                            fragmentTransaction.commit();
                         }
-                        FragmentManager fm = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.container, new ShoppingListFragment());
-                        fragmentTransaction.addToBackStack("");
-                        fragmentTransaction.commit();
-                    }
 
-                    @Override
-                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                        String failedReponse = "";
-                        if (bytes != null) {
-                            failedReponse = new String(bytes);
+                        @Override
+                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                            String failedReponse = "";
+                            if (bytes != null) {
+                                failedReponse = new String(bytes);
+                            }
+                            Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedReponse);
                         }
-                        Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedReponse);
-                    }
-                }, params);
+                    }, params);
+                } else {
+                    name.setError(Config.regexMsg.get("name"));
+                }
+
             }
 
             ;

@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import com.esgi.ykeoxay.shopping.R;
 import com.esgi.ykeoxay.shopping.Util.Config;
+import com.esgi.ykeoxay.shopping.Validation.ProductValidation;
 import com.esgi.ykeoxay.shopping.Webservice.ProductService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -52,35 +53,47 @@ public class CreateProductListFragment extends Fragment {
                 EditText name = (EditText) getActivity().findViewById(R.id.new_product_list_name);
                 EditText quantity = (EditText) getActivity().findViewById(R.id.new_product_list_quantity);
                 EditText price = (EditText) getActivity().findViewById(R.id.new_product_list_price);
-                String token = sharedPreferences.getString("token", "");
-                RequestParams params = new RequestParams();
-                params.put("token", token);
-                params.put("shopping_list_id",shoppingListId);
-                params.put("name", name.getText().toString());
-                params.put("quantity", quantity.getText().toString());
-                params.put("price", price.getText().toString());
-                ProductService.createProduct(new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                        if (Config.DISPLAY_LOG) {
-                            Log.i(Config.LOG_PREFIX, "Success! WS Response :" + new String(bytes));
+                if(ProductValidation.isFormValid(name.getText().toString(), price.getText().toString(), quantity.getText().toString())) {
+                    String token = sharedPreferences.getString("token", "");
+                    RequestParams params = new RequestParams();
+                    params.put("token", token);
+                    params.put("shopping_list_id", shoppingListId);
+                    params.put("name", name.getText().toString());
+                    params.put("quantity", quantity.getText().toString());
+                    params.put("price", price.getText().toString());
+                    ProductService.createProduct(new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                            if (Config.DISPLAY_LOG) {
+                                Log.i(Config.LOG_PREFIX, "Success! WS Response :" + new String(bytes));
+                            }
+                            ProductListFragment productListFragment = new ProductListFragment();
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.container, productListFragment);
+                            fragmentTransaction.commit();
                         }
-                        ProductListFragment productListFragment = new ProductListFragment();
-                        FragmentManager fm = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.container, productListFragment);
-                        fragmentTransaction.commit();
-                    }
 
-                    @Override
-                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                        String failedReponse = "";
-                        if (bytes != null) {
-                            failedReponse = new String(bytes);
+                        @Override
+                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                            String failedReponse = "";
+                            if (bytes != null) {
+                                failedReponse = new String(bytes);
+                            }
+                            Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedReponse);
                         }
-                        Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedReponse);
+                    }, params);
+                } else {
+                    if (!ProductValidation.checkName(name.getText().toString())) {
+                        name.setError(Config.regexMsg.get("name"));
                     }
-                }, params);
+                    if (!ProductValidation.checkPrice(price.getText().toString())) {
+                        price.setError(Config.regexMsg.get("price"));
+                    }
+                    if (!ProductValidation.checkQuantity(quantity.getText().toString())) {
+                        quantity.setError(Config.regexMsg.get("quantity"));
+                    }
+                }
             }
 
             ;

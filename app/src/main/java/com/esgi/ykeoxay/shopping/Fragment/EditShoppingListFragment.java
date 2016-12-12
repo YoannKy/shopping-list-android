@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.esgi.ykeoxay.shopping.Model.ShoppingList;
 import com.esgi.ykeoxay.shopping.R;
 import com.esgi.ykeoxay.shopping.Util.Config;
+import com.esgi.ykeoxay.shopping.Validation.ShoppingListValidation;
 import com.esgi.ykeoxay.shopping.Webservice.ShoppingListService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -61,16 +62,20 @@ public class EditShoppingListFragment extends Fragment {
             public void onClick(View v) {
                 EditText name = (EditText) getActivity().findViewById(R.id.edit_shopping_list_name);
                 CheckBox completed = (CheckBox) getActivity().findViewById(R.id.edit_shopping_list_completed);
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                String token = sharedPreferences.getString("token", "");
-                Integer completedValue = (completed.isChecked()) ? 1 : 0;
-                Log.i(Config.LOG_PREFIX, String.valueOf(completed.isChecked()));
-                RequestParams params = new RequestParams();
-                params.put("token", token);
-                params.put("name", name.getText().toString());
-                params.put("id", shoppingList.getId());
-                params.put("completed",completedValue);
-                updateData(params);
+                if(ShoppingListValidation.isFormValid(name.getText().toString())) {
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                    String token = sharedPreferences.getString("token", "");
+                    Integer completedValue = (completed.isChecked()) ? 1 : 0;
+                    Log.i(Config.LOG_PREFIX, String.valueOf(completed.isChecked()));
+                    RequestParams params = new RequestParams();
+                    params.put("token", token);
+                    params.put("name", name.getText().toString());
+                    params.put("id", shoppingList.getId());
+                    params.put("completed", completedValue);
+                    updateData(params);
+                } else {
+                    name.setError(Config.regexMsg.get("name"));
+                }
             }
         });
         super.onResume();
