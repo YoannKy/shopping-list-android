@@ -8,10 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
-/**
- * Created by ykeox on 29/11/2016.
- */
-
 public class ProductParser extends AsyncTask<String,Void,ArrayList<Product>> {
 
     private ProductListParserResponse listener;

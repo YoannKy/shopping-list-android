@@ -14,12 +14,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.esgi.ykeoxay.shopping.Activity.HomeActivity;
 import com.esgi.ykeoxay.shopping.Interface.TokenParserResponse;
 import com.esgi.ykeoxay.shopping.Parser.AuthenticationParser;
 import com.esgi.ykeoxay.shopping.R;
 import com.esgi.ykeoxay.shopping.Util.Config;
+import com.esgi.ykeoxay.shopping.Validation.AuthValidation;
 import com.esgi.ykeoxay.shopping.Webservice.AuthenticationService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -58,31 +60,42 @@ public class RegisterFragment extends Fragment implements TokenParserResponse{
             @Override
             public void onClick(final View v) {
                 EditText email = (EditText) getActivity().findViewById(R.id.email);
-                EditText firstname = (EditText) getActivity().findViewById(R.id.firstname);
+                EditText firstName = (EditText) getActivity().findViewById(R.id.firstname);
                 EditText password = (EditText) getActivity().findViewById(R.id.password);
-                RequestParams params = new RequestParams();
-                params.put("email", email.getText().toString());
-                params.put("firstname", firstname.getText().toString());
-                params.put("password", password.getText().toString());
-                AuthenticationService.register(new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                        if (Config.DISPLAY_LOG) {
-                            Log.i(Config.LOG_PREFIX, "Success! WS Response :" + new String(bytes));
+                if(AuthValidation.isFormValid(email.getText().toString(), password.getText().toString(), firstName.getText().toString())) {
+                    RequestParams params = new RequestParams();
+                    params.put("email", email.getText().toString());
+                    params.put("firstname", firstName.getText().toString());
+                    params.put("password", password.getText().toString());
+                    AuthenticationService.register(new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                            if (Config.DISPLAY_LOG) {
+                                Log.i(Config.LOG_PREFIX, "Success! WS Response :" + new String(bytes));
+                            }
+                            AuthenticationParser authenticationParser = new AuthenticationParser(getCurrentFragment());
+                            authenticationParser.execute(new String(bytes));
                         }
-                        AuthenticationParser authenticationParser = new AuthenticationParser(getCurrentFragment());
-                        authenticationParser.execute(new String(bytes));
-                    }
-                    @Override
-                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                        String failedReponse = "";
-                        if (bytes != null) {
-                            failedReponse = new String(bytes);
+                        @Override
+                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                            String failedReponse = "";
+                            if (bytes != null) {
+                                failedReponse = new String(bytes);
+                            }
+                            Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedReponse);
                         }
-                        Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedReponse);
+                    }, params);
+                } else {
+                    if(!AuthValidation.checkEmail(email.getText().toString())) {
+                        email.setError(Config.regexMsg.get("email"));
                     }
-                }, params);
-
+                    if(!AuthValidation.checkPassword(password.getText().toString())){
+                        password.setError(Config.regexMsg.get("password"));
+                    }
+                    if(!AuthValidation.checkFirstName(firstName.getText().toString())){
+                        firstName.setError(Config.regexMsg.get("firstName"));
+                    }
+                }
             }
         });
 
@@ -103,13 +116,16 @@ public class RegisterFragment extends Fragment implements TokenParserResponse{
     }
 
     @Override
-    public void responseParsed(String token) {
+    public void responseParsed(String result) {
         SharedPreferences sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        if(!token.equals("")) {
-            editor.putString("token", token);
+        if(!result.equals("") && !result.contains(" ")) {
+            editor.putString("token", result);
             Intent myIntent = new Intent(getActivity().getApplicationContext(), HomeActivity.class);
             startActivity(myIntent);
+        } else {
+            Toast toast = Toast.makeText(getActivity().getApplicationContext(),result ,Toast.LENGTH_LONG);
+            toast.show();
         }
 
     }

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import com.esgi.ykeoxay.shopping.Model.Product;
 import com.esgi.ykeoxay.shopping.R;
 import com.esgi.ykeoxay.shopping.Util.Config;
+import com.esgi.ykeoxay.shopping.Validation.ProductValidation;
 import com.esgi.ykeoxay.shopping.Webservice.ProductService;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -65,16 +66,27 @@ public class EditProductListFragment extends Fragment {
                 EditText name = (EditText) getActivity().findViewById(R.id.edit_product_name);
                 EditText price = (EditText) getActivity().findViewById(R.id.edit_product_price);
                 EditText quantity = (EditText) getActivity().findViewById(R.id.edit_product_quantity);
-
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                String token = sharedPreferences.getString("token", "");
-                RequestParams params = new RequestParams();
-                params.put("token", token);
-                params.put("name", name.getText().toString());
-                params.put("id", product.getId());
-                params.put("quantity", quantity.getText().toString());
-                params.put("price", price.getText().toString());
-                updateData(params);
+                if(ProductValidation.isFormValid(name.getText().toString(), price.getText().toString(), quantity.getText().toString())) {
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                    String token = sharedPreferences.getString("token", "");
+                    RequestParams params = new RequestParams();
+                    params.put("token", token);
+                    params.put("name", name.getText().toString());
+                    params.put("id", product.getId());
+                    params.put("quantity", quantity.getText().toString());
+                    params.put("price", price.getText().toString());
+                    updateData(params);
+                } else {
+                    if (!ProductValidation.checkName(name.getText().toString())) {
+                        name.setError(Config.regexMsg.get("name"));
+                    }
+                    if (!ProductValidation.checkPrice(price.getText().toString())) {
+                        price.setError(Config.regexMsg.get("price"));
+                    }
+                    if (!ProductValidation.checkQuantity(quantity.getText().toString())) {
+                        quantity.setError(Config.regexMsg.get("quantity"));
+                    }
+                }
             }
         });
         super.onResume();

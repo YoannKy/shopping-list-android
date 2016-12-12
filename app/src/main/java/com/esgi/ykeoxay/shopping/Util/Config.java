@@ -1,8 +1,6 @@
 package com.esgi.ykeoxay.shopping.Util;
 
-/**
- * Created by ykeox on 27/11/2016.
- */
+import java.util.HashMap;
 
 public class Config {
     public final static Boolean DISPLAY_LOG = true;
@@ -18,4 +16,15 @@ public class Config {
     public final static String URL_PRODUCT = "product/list.php";
     public final static String URL_EDIT_PRODUCT = "product/edit.php";
     public final static String URL_REMOVE_PRODUCT = "product/remove.php";
+    public final static String ERROR_AUTH = "Error: check your credential or try later";
+    public final static HashMap<String, String> regexMsg = new HashMap<String, String>() {
+        {
+            put("email", "The email is not valid");
+            put("firstName", "The name must be between 3 and 10 characters");
+            put("name", "The name must be between 3 and 10 characters");
+            put("password", "The password must be between 3 and 10 characters");
+            put("quantity", "The quantity must be a number with minimum value of 1");
+            put("price", "The price must be a number with minimum value of 1");
+        }
+    };
 }

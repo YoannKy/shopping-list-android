@@ -5,10 +5,6 @@ import com.esgi.ykeoxay.shopping.Interface.TokenParserResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by ykeox on 29/11/2016.
- */
-
 public class AuthenticationParser extends AsyncTask<String,Void,String> {
 
     private TokenParserResponse listener;
@@ -38,7 +34,7 @@ public class AuthenticationParser extends AsyncTask<String,Void,String> {
         if(contentJSON.getInt("code") == 0) {
             return contentJSON.getJSONObject("result").getString("token");
         } else {
-            return "";
+            return contentJSON.getString("msg");
         }
     }
 }
