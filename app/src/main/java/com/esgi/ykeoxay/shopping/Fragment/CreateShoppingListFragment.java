@@ -46,7 +46,7 @@ public class CreateShoppingListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 EditText name = (EditText) getActivity().findViewById(R.id.new_shopping_list_name);
-                if(ShoppingListValidation.isFormValid(name.getText().toString())) {
+                if(ShoppingListValidation.isFormValid(name)) {
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
                     String token = sharedPreferences.getString("token", "");
                     RequestParams params = new RequestParams();
@@ -74,8 +74,6 @@ public class CreateShoppingListFragment extends Fragment {
                             Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedReponse);
                         }
                     }, params);
-                } else {
-                    name.setError(Config.regexMsg.get("name"));
                 }
 
             }

@@ -60,7 +60,7 @@ import android.widget.Toast;
             public void onClick(View v) {
                 EditText login = (EditText) getActivity().findViewById(R.id.email);
                 EditText password = (EditText) getActivity().findViewById(R.id.password);
-                if(AuthValidation.isFormValid(login.getText().toString(), password.getText().toString())) {
+                if(AuthValidation.isFormValid(login, password)) {
                     RequestParams params = new RequestParams();
                     params.put("email", login.getText().toString());
                     params.put("password", password.getText().toString());
@@ -83,13 +83,6 @@ import android.widget.Toast;
                                 Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedReponse);
                             }
                         }, params);
-                } else {
-                    if(!AuthValidation.checkEmail(login.getText().toString())) {
-                        login.setError(Config.regexMsg.get("email"));
-                    }
-                    if(!AuthValidation.checkPassword(password.getText().toString())){
-                        password.setError(Config.regexMsg.get("password"));
-                    }
                 }
             }
         });

@@ -53,7 +53,7 @@ public class CreateProductListFragment extends Fragment {
                 EditText name = (EditText) getActivity().findViewById(R.id.new_product_list_name);
                 EditText quantity = (EditText) getActivity().findViewById(R.id.new_product_list_quantity);
                 EditText price = (EditText) getActivity().findViewById(R.id.new_product_list_price);
-                if(ProductValidation.isFormValid(name.getText().toString(), price.getText().toString(), quantity.getText().toString())) {
+                if(ProductValidation.isFormValid(name, price, quantity)) {
                     String token = sharedPreferences.getString("token", "");
                     RequestParams params = new RequestParams();
                     params.put("token", token);
@@ -83,16 +83,6 @@ public class CreateProductListFragment extends Fragment {
                             Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedReponse);
                         }
                     }, params);
-                } else {
-                    if (!ProductValidation.checkName(name.getText().toString())) {
-                        name.setError(Config.regexMsg.get("name"));
-                    }
-                    if (!ProductValidation.checkPrice(price.getText().toString())) {
-                        price.setError(Config.regexMsg.get("price"));
-                    }
-                    if (!ProductValidation.checkQuantity(quantity.getText().toString())) {
-                        quantity.setError(Config.regexMsg.get("quantity"));
-                    }
                 }
             }
 

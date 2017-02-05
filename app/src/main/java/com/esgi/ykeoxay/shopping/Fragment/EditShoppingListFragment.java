@@ -62,7 +62,7 @@ public class EditShoppingListFragment extends Fragment {
             public void onClick(View v) {
                 EditText name = (EditText) getActivity().findViewById(R.id.edit_shopping_list_name);
                 CheckBox completed = (CheckBox) getActivity().findViewById(R.id.edit_shopping_list_completed);
-                if(ShoppingListValidation.isFormValid(name.getText().toString())) {
+                if(ShoppingListValidation.isFormValid(name)) {
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
                     String token = sharedPreferences.getString("token", "");
                     Integer completedValue = (completed.isChecked()) ? 1 : 0;
@@ -73,8 +73,6 @@ public class EditShoppingListFragment extends Fragment {
                     params.put("id", shoppingList.getId());
                     params.put("completed", completedValue);
                     updateData(params);
-                } else {
-                    name.setError(Config.regexMsg.get("name"));
                 }
             }
         });
