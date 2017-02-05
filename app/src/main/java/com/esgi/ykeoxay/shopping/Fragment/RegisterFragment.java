@@ -62,7 +62,7 @@ public class RegisterFragment extends Fragment implements TokenParserResponse{
                 EditText email = (EditText) getActivity().findViewById(R.id.email);
                 EditText firstName = (EditText) getActivity().findViewById(R.id.firstname);
                 EditText password = (EditText) getActivity().findViewById(R.id.password);
-                if(AuthValidation.isFormValid(email.getText().toString(), password.getText().toString(), firstName.getText().toString())) {
+                if(AuthValidation.isFormValid(email, password, firstName)) {
                     RequestParams params = new RequestParams();
                     params.put("email", email.getText().toString());
                     params.put("firstname", firstName.getText().toString());
@@ -85,16 +85,6 @@ public class RegisterFragment extends Fragment implements TokenParserResponse{
                             Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedReponse);
                         }
                     }, params);
-                } else {
-                    if(!AuthValidation.checkEmail(email.getText().toString())) {
-                        email.setError(Config.regexMsg.get("email"));
-                    }
-                    if(!AuthValidation.checkPassword(password.getText().toString())){
-                        password.setError(Config.regexMsg.get("password"));
-                    }
-                    if(!AuthValidation.checkFirstName(firstName.getText().toString())){
-                        firstName.setError(Config.regexMsg.get("firstName"));
-                    }
                 }
             }
         });
