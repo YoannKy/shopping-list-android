@@ -17,7 +17,7 @@
     <string name="edit_completed">Close this list</string>
     <string name="submit_form">Submit</string>
     <!-- Strings related to login -->
-    <string name="switch_auth">I don\'t have an accout yet</string>
+    <string name="switch_auth">I don\'t have an account yet</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_firstname">Firstname</string>
     <string name="prompt_password">Password</string>
@@ -30,7 +30,4 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

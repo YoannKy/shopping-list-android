@@ -83,11 +83,11 @@ public class ProductListFragment extends Fragment implements ProductListParserRe
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                String failedReponse = "";
+                String failedResponse = "";
                 if (bytes != null) {
-                    failedReponse = new String(bytes);
+                    failedResponse = new String(bytes);
                 }
-                Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedReponse);
+                Log.i(Config.LOG_PREFIX, "Failure! WS Response :" + failedResponse);
             }
         }, params);
         super.onResume();
