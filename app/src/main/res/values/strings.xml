@@ -16,6 +16,7 @@
     <string name="open_shopping_list">This shopping list is closed</string>
     <string name="edit_completed">Close this list</string>
     <string name="submit_form">Submit</string>
+    <string name="no_item">this list is empty, create a new item</string>
     <!-- Strings related to login -->
     <string name="switch_auth">I don\'t have an account yet</string>
     <string name="prompt_email">Email</string>
@@ -27,6 +28,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="disconnect">Disconnect</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

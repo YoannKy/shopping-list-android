@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.esgi.ykeoxay.shopping.Adapter.ProductAdapter;
 import com.esgi.ykeoxay.shopping.Interface.ProductListParserResponse;
 import com.esgi.ykeoxay.shopping.Model.Product;
@@ -96,6 +98,8 @@ public class ProductListFragment extends Fragment implements ProductListParserRe
     private void initViewContent(final ArrayList<Product> productList) {
         this.listView = (ListView) getView().findViewById(R.id.list_view);
         this.adapter = new ProductAdapter(getActivity(), productList);
+        TextView emptyText = (TextView) getView().findViewById(R.id.no_product_list);
+        this.listView.setEmptyView(emptyText);
         this.listView.setAdapter(this.adapter);
     }
 
