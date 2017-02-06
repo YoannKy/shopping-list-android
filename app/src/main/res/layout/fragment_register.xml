@@ -27,8 +27,8 @@
             android:layout_height="wrap_content"
             android:width="200dp"
             android:hint="@string/prompt_firstname"
-            android:textColor="@color/gray"
-            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
             android:inputType="textLongMessage"
             android:layout_width="wrap_content">
         </EditText>
@@ -38,8 +38,8 @@
             android:width="200dp"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_password"
-            android:textColor="@color/gray"
-            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
             android:inputType="textPassword"
             android:layout_width="wrap_content">
         </EditText>
