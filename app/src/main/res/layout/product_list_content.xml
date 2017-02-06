@@ -34,13 +34,14 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textColor="@color/gray"
-            android:layout_width="200dp" />
+            android:layout_width="100dp" />
 
         <TextView
             android:id="@+id/product_price_label"
             android:layout_height="wrap_content"
             android:text="@string/price"
             android:layout_centerInParent="true"
+            android:layout_gravity="right"
             android:layout_width="wrap_content"
             android:layout_alignParentRight="true"
             android:textColor="@color/gray"
@@ -48,9 +49,10 @@
         <TextView
             android:id="@+id/product_price"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
             android:text="TextView"
             android:layout_centerInParent="true"
-            android:layout_width="200dp"
             android:layout_alignParentRight="true"
             android:textColor="@color/gray" />
     </LinearLayout>

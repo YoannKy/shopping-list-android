@@ -17,6 +17,7 @@
     <string name="edit_completed">Close this list</string>
     <string name="submit_form">Submit</string>
     <string name="no_item">this list is empty, create a new item</string>
+    <string name="my_shopping_list">My shopping list</string>
     <!-- Strings related to login -->
     <string name="switch_auth">I don\'t have an account yet</string>
     <string name="prompt_email">Email</string>

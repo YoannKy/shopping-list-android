@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -78,6 +79,8 @@ public class ShoppingListAdapter extends BaseAdapter {
         viewHolder.completed.setText(String.valueOf(currentShoppingList.getCompleted()));
         if(currentShoppingList.getCompleted()) {
             viewHolder.completedLabel.setText(context.getResources().getString(R.string.open_shopping_list));
+            viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
         } else {
             viewHolder.completedLabel.setText(context.getResources().getString(R.string.closed_shopping_list));
         }
