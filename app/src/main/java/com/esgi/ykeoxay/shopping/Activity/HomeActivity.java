@@ -91,6 +91,13 @@ public class HomeActivity extends AppCompatActivity
 
             Intent myIntent = new Intent(this.getApplicationContext(), AuthenticationActivity.class);
             startActivity(myIntent);
+        } else if (id == R.id.my_shopping_list) {
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.container, new ShoppingListFragment());
+            fragmentTransaction.addToBackStack("");
+            fragmentTransaction.commit();
+            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

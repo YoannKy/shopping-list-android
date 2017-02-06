@@ -93,11 +93,13 @@ public class ShoppingListFragment extends Fragment implements ShoppingListParser
     }
 
     private void initViewContent(final ArrayList<ShoppingList> shoppingList) {
-        this.listView = (ListView) getView().findViewById(R.id.list_view);
-        this.adapter = new ShoppingListAdapter(getActivity(), shoppingList);
-        TextView emptyText = (TextView) getView().findViewById(R.id.no_shopping_list);
-        this.listView.setEmptyView(emptyText);
-        this.listView.setAdapter(this.adapter);
+        if(getView() != null) {
+            this.listView = (ListView) getView().findViewById(R.id.list_view);
+            this.adapter = new ShoppingListAdapter(getActivity(), shoppingList);
+            TextView emptyText = (TextView) getView().findViewById(R.id.no_shopping_list);
+            this.listView.setEmptyView(emptyText);
+            this.listView.setAdapter(this.adapter);
+        }
     }
 
     @Override
