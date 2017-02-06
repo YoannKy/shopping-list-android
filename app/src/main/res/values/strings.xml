@@ -18,6 +18,9 @@
     <string name="submit_form">Submit</string>
     <string name="no_item">this list is empty, create a new item</string>
     <string name="my_shopping_list">My shopping list</string>
+    <string name="welcome">Welcome</string>
+    <string name="about">About</string>
+    <string name="info">This is a shopping list application developed by Albert Nguyen, Gaël Graffion, Jordan Croisic, Yoann Keoxay</string>
     <!-- Strings related to login -->
     <string name="switch_auth">I don\'t have an account yet</string>
     <string name="prompt_email">Email</string>
@@ -33,4 +36,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

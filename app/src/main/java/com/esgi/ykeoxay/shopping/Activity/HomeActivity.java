@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.esgi.ykeoxay.shopping.Fragment.AboutFragment;
 import com.esgi.ykeoxay.shopping.Fragment.ShoppingListFragment;
 import com.esgi.ykeoxay.shopping.R;
 
@@ -69,8 +70,12 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.about) {
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.container, new AboutFragment());
+            fragmentTransaction.addToBackStack("");
+            fragmentTransaction.commit();
         }
 
         return super.onOptionsItemSelected(item);
