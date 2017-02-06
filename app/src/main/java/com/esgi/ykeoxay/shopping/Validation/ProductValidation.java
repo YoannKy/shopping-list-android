@@ -22,7 +22,7 @@ public class ProductValidation {
     * */
     public static boolean checkName(EditText input) {
         pattern = pattern.compile("^([a-zA-Z0-9]{3,10})$");
-        matcher = pattern.matcher(input.getText().toString());
+        matcher = pattern.matcher(input.getText().toString().trim());
         if (matcher.matches()) {
             return true;
         } else {
@@ -36,7 +36,7 @@ public class ProductValidation {
     * */
     public static  boolean checkQuantity(EditText input) {
         pattern = pattern.compile("[0-9]{1,10}");
-        matcher = pattern.matcher(input.getText().toString());
+        matcher = pattern.matcher(input.getText().toString().trim());
         if (matcher.matches()) {
             return true;
         } else {

@@ -6,7 +6,6 @@
         android:icon="@drawable/ic_shopping"
         android:title="@string/my_shopping_list" />
 
-
     <item
         android:id="@+id/disconnect"
         android:icon="@drawable/ic_logout"
