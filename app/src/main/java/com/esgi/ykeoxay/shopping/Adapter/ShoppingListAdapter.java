@@ -35,6 +35,7 @@ public class ShoppingListAdapter extends BaseAdapter {
     private List<ShoppingList> lShoppingList;
     private LayoutInflater myLayout;
     private Context context;
+    private ShoppingList shoppingList;
     private ViewHolder viewHolder;
 
     public ShoppingListAdapter(Context context, ArrayList<ShoppingList> lShoppingList) {
@@ -142,7 +143,7 @@ public class ShoppingListAdapter extends BaseAdapter {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String token = sharedPreferences.getString("token", "");
         RequestParams params = new RequestParams();
-        final ShoppingList shoppingList = lShoppingList.get(position);
+        this.shoppingList = lShoppingList.get(position);
         params.put("token", token);
         params.put("id", shoppingList.getId());
         ShoppingListService.removeShoppingList(new AsyncHttpResponseHandler() {

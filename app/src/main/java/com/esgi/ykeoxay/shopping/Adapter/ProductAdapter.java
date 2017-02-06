@@ -33,6 +33,7 @@ public class ProductAdapter extends BaseAdapter {
 
     private List<Product> lProduct;
     private LayoutInflater myLayout;
+    private Product product;
     private Context context;
     private ViewHolder viewHolder;
 
@@ -120,7 +121,7 @@ public class ProductAdapter extends BaseAdapter {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String token = sharedPreferences.getString("token", "");
         RequestParams params = new RequestParams();
-        final Product product = lProduct.get(position);
+        this.product = lProduct.get(position);
         params.put("token", token);
         params.put("id", product.getId());
         ProductService.removeProduct(new AsyncHttpResponseHandler() {
