@@ -54,6 +54,13 @@ import android.widget.Toast;
 
     @Override
     public void onResume() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        String token = sharedPreferences.getString("token", "");
+        Log.i("test", token);
+        if (!token.equals("")) {
+            Intent myIntent = new Intent(getActivity().getApplicationContext(), HomeActivity.class);
+            startActivity(myIntent);
+        }
         Button submit = (Button) getActivity().findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
