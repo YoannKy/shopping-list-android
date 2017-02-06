@@ -23,7 +23,7 @@ public class AuthValidation {
      * */
     public static  boolean checkEmail(EditText input) {
         pattern = pattern.compile("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})");
-        matcher = pattern.matcher(input.getText().toString());
+        matcher = pattern.matcher(input.getText().toString().trim());
         if (matcher.matches()) {
             return true;
         } else {
@@ -38,7 +38,7 @@ public class AuthValidation {
     * */
     public static boolean checkFirstName(EditText input) {
         pattern = pattern.compile("^([a-zA-Z0-9]{3,10})$");
-        matcher = pattern.matcher(input.getText().toString());
+        matcher = pattern.matcher(input.getText().toString().trim());
         if (matcher.matches()) {
             return true;
         } else {
