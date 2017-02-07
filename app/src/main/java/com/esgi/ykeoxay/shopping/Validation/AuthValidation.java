@@ -21,13 +21,12 @@ public class AuthValidation {
     /*
      * email pattern
      * */
-    public static  boolean checkEmail(EditText input) {
+    public static  boolean checkEmail(String email) {
         pattern = pattern.compile("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})");
-        matcher = pattern.matcher(input.getText().toString().trim());
+        matcher = pattern.matcher(email.trim());
         if (matcher.matches()) {
             return true;
         } else {
-            input.setError(Config.regexMsg.get("email"));
             return false;
         }
     }
@@ -36,13 +35,12 @@ public class AuthValidation {
     * Minimal length = 0
     * Maximum lenght = 10
     * */
-    public static boolean checkFirstName(EditText input) {
+    public static boolean checkFirstName(String firstName) {
         pattern = pattern.compile("^([a-zA-Z0-9]{3,10})$");
-        matcher = pattern.matcher(input.getText().toString().trim());
+        matcher = pattern.matcher(firstName.trim());
         if (matcher.matches()) {
             return true;
         } else {
-            input.setError(Config.regexMsg.get("firstName"));
             return false;
         }
     }
@@ -51,13 +49,12 @@ public class AuthValidation {
     * Minimal length = 0
     * Maximum lenght = 10
     * */
-    public static  boolean checkPassword(EditText input) {
+    public static  boolean checkPassword(String password) {
         pattern = pattern.compile("^([a-zA-Z0-9]{3,10})$");
-        matcher = pattern.matcher(input.getText().toString());
+        matcher = pattern.matcher(password);
         if (matcher.matches()) {
             return true;
         } else {
-            input.setError(Config.regexMsg.get("password"));
             return false;
         }
     }
@@ -65,10 +62,12 @@ public class AuthValidation {
     public static boolean isFormValid(EditText emailInput, EditText passwordInput) {
         AuthValidation authValidation = new AuthValidation();
         Integer errorCount = 0;
-        if(!authValidation.checkEmail(emailInput)){
+        if(!authValidation.checkEmail(emailInput.getText().toString())){
+            emailInput.setError(Config.regexMsg.get("email"));
             errorCount+=1;
         }
-        if(!authValidation.checkPassword(passwordInput)) {
+        if(!authValidation.checkPassword(passwordInput.getText().toString())) {
+            passwordInput.setError(Config.regexMsg.get("password"));
             errorCount +=1;
         }
         return errorCount == 0;
@@ -77,13 +76,16 @@ public class AuthValidation {
     public static boolean isFormValid(EditText emailInput, EditText passwordInput, EditText firstNameInput) {
         AuthValidation authValidation = new AuthValidation();
         Integer errorCount = 0;
-        if(!authValidation.checkEmail(emailInput)){
+        if(!authValidation.checkEmail(emailInput.getText().toString())){
+            emailInput.setError(Config.regexMsg.get("email"));
             errorCount+=1;
         }
-        if(!authValidation.checkPassword(passwordInput)){
+        if(!authValidation.checkPassword(passwordInput.getText().toString())){
+            passwordInput.setError(Config.regexMsg.get("password"));
             errorCount+=1;
         }
-        if(!authValidation.checkFirstName(firstNameInput)){
+        if(!authValidation.checkFirstName(firstNameInput.getText().toString())){
+            firstNameInput.setError(Config.regexMsg.get("firstName"));
             errorCount+=1;
         }
         return errorCount == 0;
