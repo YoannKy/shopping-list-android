@@ -20,13 +20,12 @@ public class ProductValidation {
     * Minimal length = 0
     * Maximum lenght = 20
     * */
-    public static boolean checkName(EditText input) {
+    public static boolean checkName(String name) {
         pattern = pattern.compile("^([a-zA-Z0-9]{3,10})$");
-        matcher = pattern.matcher(input.getText().toString().trim());
+        matcher = pattern.matcher(name.trim());
         if (matcher.matches()) {
             return true;
         } else {
-            input.setError(Config.regexMsg.get("name"));
             return false;
         }
     }
@@ -34,13 +33,12 @@ public class ProductValidation {
     /*
     * Integer
     * */
-    public static  boolean checkQuantity(EditText input) {
+    public static  boolean checkQuantity(String quantity) {
         pattern = pattern.compile("[0-9]{1,10}");
-        matcher = pattern.matcher(input.getText().toString().trim());
+        matcher = pattern.matcher(quantity.trim());
         if (matcher.matches()) {
             return true;
         } else {
-            input.setError(Config.regexMsg.get("quantity"));
             return false;
         }
     };
@@ -48,13 +46,12 @@ public class ProductValidation {
     /*
     * Integer
     * */
-    public static boolean checkPrice(EditText input) {
+    public static boolean checkPrice(String price) {
         pattern = pattern.compile("[0-9]+([,.][0-9]+)?");
-        matcher = pattern.matcher(input.getText().toString());
+        matcher = pattern.matcher(price.trim());
         if (matcher.matches()) {
             return true;
         } else {
-            input.setError(Config.regexMsg.get("price"));
             return false;
         }
     }
@@ -62,13 +59,16 @@ public class ProductValidation {
     public static boolean isFormValid(EditText nameInput, EditText priceInput, EditText quantityInput) {
         ProductValidation productValidation = new ProductValidation();
         Integer errorCount = 0;
-        if(!productValidation.checkName(nameInput)){
+        if(!productValidation.checkName(nameInput.getText().toString())){
+            nameInput.setError(Config.regexMsg.get("name"));
             errorCount+=1;
         }
-        if(!productValidation.checkPrice(priceInput)) {
+        if(!productValidation.checkPrice(priceInput.getText().toString())) {
+            priceInput.setError(Config.regexMsg.get("price"));
             errorCount +=1;
         }
-        if(!productValidation.checkQuantity(quantityInput)) {
+        if(!productValidation.checkQuantity(quantityInput.getText().toString())) {
+            quantityInput.setError(Config.regexMsg.get("quantity"));
             errorCount +=1;
         }
         return errorCount == 0;

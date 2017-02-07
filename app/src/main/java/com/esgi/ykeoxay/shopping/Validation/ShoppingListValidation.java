@@ -20,13 +20,12 @@ public class ShoppingListValidation {
     * Minimal length = 0
     * Maximum lenght = 20
     * */
-    public  static boolean checkName(EditText input) {
+    public  static boolean checkName(String name) {
         pattern = pattern.compile("^([a-zA-Z0-9]{3,10})$");
-        matcher = pattern.matcher(input.getText().toString().trim());
+        matcher = pattern.matcher(name.trim());
         if (matcher.matches()) {
             return true;
         } else {
-            input.setError(Config.regexMsg.get("name"));
             return false;
         }
     }
@@ -34,7 +33,8 @@ public class ShoppingListValidation {
     public static boolean isFormValid(EditText input) {
         ShoppingListValidation shoppingListValidation = new ShoppingListValidation();
         Integer errorCount = 0;
-        if(!shoppingListValidation.checkName(input)){
+        if(!shoppingListValidation.checkName(input.getText().toString())){
+            input.setError(Config.regexMsg.get("name"));
             errorCount+=1;
         }
         return errorCount == 0;     
