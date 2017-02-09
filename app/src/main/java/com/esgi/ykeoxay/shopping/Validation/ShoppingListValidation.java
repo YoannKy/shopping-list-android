@@ -21,7 +21,7 @@ public class ShoppingListValidation {
     * Maximum lenght = 10
     * */
     public static boolean checkName(String name) {
-        pattern = pattern.compile("^([a-zA-Z0-9]{3,10})$");
+        pattern = pattern.compile("^([a-zA-Z0-9 ]{3,10})$");
         matcher = pattern.matcher(name.trim());
         if (matcher.matches()) {
             return true;
