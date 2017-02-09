@@ -17,8 +17,8 @@ public class ProductValidation {
 
 
     /*
-    * Minimal length = 0
-    * Maximum lenght = 20
+    * Minimal length = 3
+    * Maximum lenght = 10
     * */
     public static boolean checkName(String name) {
         pattern = pattern.compile("^([a-zA-Z0-9]{3,10})$");

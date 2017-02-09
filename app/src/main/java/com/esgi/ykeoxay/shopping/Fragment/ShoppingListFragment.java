@@ -92,7 +92,7 @@ public class ShoppingListFragment extends Fragment implements ShoppingListParser
         super.onResume();
     }
 
-    private void initViewContent(final ArrayList<ShoppingList> shoppingList) {
+    private void initViewContent(ArrayList<ShoppingList> shoppingList) {
         if(getView() != null) {
             this.listView = (ListView) getView().findViewById(R.id.list_view);
             this.adapter = new ShoppingListAdapter(getActivity(), shoppingList);

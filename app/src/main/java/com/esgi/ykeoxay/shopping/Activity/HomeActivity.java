@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.esgi.ykeoxay.shopping.Fragment.AboutFragment;
 import com.esgi.ykeoxay.shopping.Fragment.ShoppingListFragment;

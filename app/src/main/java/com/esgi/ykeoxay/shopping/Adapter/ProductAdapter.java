@@ -23,15 +23,10 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Created by ykeox on 28/11/2016.
- */
 
 public class ProductAdapter extends BaseAdapter {
 
-    private List<Product> lProduct;
+    private ArrayList<Product> lProduct;
     private LayoutInflater myLayout;
     private Product product;
     private Context context;

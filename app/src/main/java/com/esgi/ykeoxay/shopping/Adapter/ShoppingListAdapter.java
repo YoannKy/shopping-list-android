@@ -25,15 +25,11 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Created by ykeox on 28/11/2016.
- */
 
 public class ShoppingListAdapter extends BaseAdapter {
 
-    private List<ShoppingList> lShoppingList;
+    private ArrayList<ShoppingList> lShoppingList;
     private LayoutInflater myLayout;
     private Context context;
     private ShoppingList shoppingList;
@@ -60,6 +56,7 @@ public class ShoppingListAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
+
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -108,7 +105,7 @@ public class ShoppingListAdapter extends BaseAdapter {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               removeShoppingList(position);
+                removeShoppingList(position);
             }
         });
 

@@ -5,10 +5,6 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by ykeox on 07/02/2017.
- */
-
 public class ShoppingListValidationTest {
 
     @Test

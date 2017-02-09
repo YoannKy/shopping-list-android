@@ -32,7 +32,7 @@ public class AuthValidation {
     }
 
     /*
-    * Minimal length = 0
+    * Minimal length = 3
     * Maximum lenght = 10
     * */
     public static boolean checkFirstName(String firstName) {
@@ -46,7 +46,7 @@ public class AuthValidation {
     }
 
     /*
-    * Minimal length = 0
+    * Minimal length = 3
     * Maximum lenght = 10
     * */
     public static  boolean checkPassword(String password) {

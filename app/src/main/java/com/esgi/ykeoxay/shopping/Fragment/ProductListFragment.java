@@ -95,7 +95,7 @@ public class ProductListFragment extends Fragment implements ProductListParserRe
         super.onResume();
     }
 
-    private void initViewContent(final ArrayList<Product> productList) {
+    private void initViewContent(ArrayList<Product> productList) {
         this.listView = (ListView) getView().findViewById(R.id.list_view);
         this.adapter = new ProductAdapter(getActivity(), productList);
         TextView emptyText = (TextView) getView().findViewById(R.id.no_product_list);
