@@ -33,13 +33,13 @@ public class ShoppingListAdapter extends BaseAdapter {
     private LayoutInflater myLayout;
     private Context context;
     private ShoppingList shoppingList;
-    private ViewHolder viewHolder;
+    //private ViewHolder viewHolder;
 
     public ShoppingListAdapter(Context context, ArrayList<ShoppingList> lShoppingList) {
         this.context = context;
         this.lShoppingList = lShoppingList;
         myLayout = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        viewHolder = new ViewHolder();
+       // viewHolder = new ViewHolder();
     }
 
     @Override
@@ -60,7 +60,9 @@ public class ShoppingListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
         if (convertView == null) {
+            viewHolder = new ViewHolder();
             convertView = myLayout.inflate(R.layout.shopping_list_content, null);
             viewHolder.name = (TextView) convertView.findViewById(R.id.shopping_list_name);
             viewHolder.id = (TextView) convertView.findViewById(R.id.shopping_list_id);

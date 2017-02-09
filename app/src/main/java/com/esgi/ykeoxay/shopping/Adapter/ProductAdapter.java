@@ -30,13 +30,11 @@ public class ProductAdapter extends BaseAdapter {
     private LayoutInflater myLayout;
     private Product product;
     private Context context;
-    private ViewHolder viewHolder;
 
     public ProductAdapter(Context context, ArrayList<Product> lProduct) {
         this.context = context;
         this.lProduct = lProduct;
         myLayout = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        viewHolder = new ViewHolder();
     }
 
     @Override
@@ -56,7 +54,9 @@ public class ProductAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
         if (convertView == null) {
+            viewHolder = new ViewHolder();
             convertView = myLayout.inflate(R.layout.product_list_content, null);
             viewHolder.name = (TextView) convertView.findViewById(R.id.product_name);
             viewHolder.id = (TextView) convertView.findViewById(R.id.product_id);
