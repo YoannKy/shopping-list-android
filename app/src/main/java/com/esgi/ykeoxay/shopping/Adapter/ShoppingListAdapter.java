@@ -33,13 +33,11 @@ public class ShoppingListAdapter extends BaseAdapter {
     private LayoutInflater myLayout;
     private Context context;
     private ShoppingList shoppingList;
-    //private ViewHolder viewHolder;
 
     public ShoppingListAdapter(Context context, ArrayList<ShoppingList> lShoppingList) {
         this.context = context;
         this.lShoppingList = lShoppingList;
         myLayout = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-       // viewHolder = new ViewHolder();
     }
 
     @Override
